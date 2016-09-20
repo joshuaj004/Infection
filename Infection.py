@@ -21,15 +21,22 @@ def tester():
     # Kylie coaches Chris
     kylie.addTrainee(chris)
     printer(users)
-    print("*"*50)
     # # John leaves Matt to be coached by Kylie
     john.removeCoach(matt)
     kylie.addTrainee(john)
+    printer(users)
+    # Works with kylie
+    # kylie.fullInfection(1)
+    # Works with chris
+    # chris.fullInfection(1)
+    john.fullInfection(1)
+    sarah.fullInfection(2)
     printer(users)
 
 def printer(users):
     for x in users:
         print(x)
+    print("*"*50)
 
 if __name__ == "__main__":
     main()

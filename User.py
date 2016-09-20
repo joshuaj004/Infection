@@ -11,13 +11,16 @@ class User:
         return self.name
 
     def getCoaches(self):
-        return self.coaches
+        return self.coaches[0]
 
     def getTrainees(self):
         return self.trainees
 
     def getVersion(self):
         return self.version
+
+    def updateVersion(self, version=1):
+        self.version = version
 
     def addCoach(self, coach, auto=False):
         if len(self.coaches) > 0:
@@ -55,6 +58,27 @@ class User:
             self.trainees.remove(trainee)
             if not auto:
                 trainee.removeCoach(self, True)
+
+    def fullInfection(self, infection=1):
+        processed = []
+        unprocessed = set()
+        # add self to unprocessed
+        unprocessed.add(self)
+        while len(unprocessed) != 0:
+            current = unprocessed.pop()
+            # Add coach to list
+            if current.coaches not in processed:
+                c = current.coaches
+                if len(c) > 0:
+                    unprocessed.add(c[0])
+            # Add trainess to infection
+            for trainee in current.trainees:
+                if trainee not in processed:
+                    unprocessed.add(trainee)
+            current.updateVersion(infection)
+            processed.append(current)
+
+
 
     def __str__(self):
         n = "Name: " + self.name
