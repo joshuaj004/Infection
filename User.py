@@ -4,11 +4,11 @@ class User:
     groups = []
 
     """A simple User class for the infection scenario"""
-    def __init__(self, name):#, coaches=[], trainees=[], version=0):
+    def __init__(self, name):
         self.name = name
-        self.coaches = []#coaches
-        self.trainees = []#trainees
-        self.version = 0#version
+        self.coaches = []
+        self.trainees = []
+        self.version = 0
         User.users.append(self)
 
     def getName(self):
