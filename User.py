@@ -1,11 +1,15 @@
 # Spec: https://docs.google.com/document/d/1NiKv-MjULOFyyc8f5w8R_EqvuPJ10wJVJgZhtTK9VKc
 class User:
+    users = []
+    groups = []
+
     """A simple User class for the infection scenario"""
     def __init__(self, name):#, coaches=[], trainees=[], version=0):
         self.name = name
         self.coaches = []#coaches
         self.trainees = []#trainees
         self.version = 0#version
+        User.users.append(self)
 
     def getName(self):
         return self.name
@@ -21,6 +25,10 @@ class User:
 
     def updateVersion(self, version=1):
         self.version = version
+
+    @staticmethod
+    def getUsers():
+        return User.users
 
     def addCoach(self, coach, auto=False):
         if len(self.coaches) > 0:
@@ -60,24 +68,65 @@ class User:
                 trainee.removeCoach(self, True)
 
     def fullInfection(self, infection=1):
+        infectees = self.groupings_helper()
+        for infectee in infectees:
+            infectee.updateVersion(infection)
+
+
+    @staticmethod
+    def create_groupings():
+        users = User.users[:]
+        groupings = []
+        while len(users) > 0:
+            base = users[0]
+            base_groupings = base.groupings_helper()
+            groupings.append(base_groupings)
+            for x in base_groupings:
+                if x in users:
+                    users.remove(x)
+        User.groups = groupings
+
+
+    def groupings_helper(self):
         processed = []
         unprocessed = set()
-        # add self to unprocessed
         unprocessed.add(self)
         while len(unprocessed) != 0:
             current = unprocessed.pop()
-            # Add coach to list
             if current.coaches not in processed:
                 c = current.coaches
                 if len(c) > 0:
                     unprocessed.add(c[0])
-            # Add trainess to infection
             for trainee in current.trainees:
                 if trainee not in processed:
                     unprocessed.add(trainee)
-            current.updateVersion(infection)
             processed.append(current)
+        return set(processed)
 
+    @staticmethod
+    def limited_infection(number, infection=1):
+        # This will use a 20% margin for the term close in
+        # "infect close to a given number of users"
+        low = int(number * 0.8)
+        # Plus 1 because python int rounds to the lower int
+        hi = int(number * 1.2 + 1)
+        User.create_groupings()
+        users = sorted(User.groups[:], key=len, reverse=True)
+        usersLength = len(users)
+        current_val = 0
+        index = 0
+        infection_list = []
+        while current_val < hi and (index + 1) < usersLength:
+            new_len = current_val + len(users[index])
+            if current_val > number and abs(current_val - number) < abs(new_len - number):
+                break
+            elif new_len < hi:
+                infection_list.extend(users[index])
+                current_val += len(users[index])
+            index += 1
+        for user in infection_list:
+            if user.version != infection:
+                user.updateVersion(infection)
 
 
     def __str__(self):
