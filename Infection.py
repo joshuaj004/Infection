@@ -5,35 +5,7 @@ from User import User
 def main():
     tester()
 
-
 def tester():
-    """matt = User("matt")
-    sarah = User("sarah")
-    james = User("james")
-    john = User("john")
-    kylie = User("kylie")
-    chris = User("chris")
-    users = User.getUsers()#matt, sarah, james, john, kylie, chris]
-    # Matt coaches Sarah, James, and John
-    matt.addTrainee(sarah)
-    matt.addTrainee(james)
-    matt.addTrainee(john)
-    # Kylie coaches Chris
-    kylie.addTrainee(chris)
-    printer(users)
-    User.create_groupings()
-    # # John leaves Matt to be coached by Kylie
-    john.removeCoach(matt)
-    kylie.addTrainee(john)
-    printer(users)
-    # Works with kylie
-    # kylie.fullInfection(1)
-    # Works with chris
-    # chris.fullInfection(1)
-    john.fullInfection(1)
-    sarah.fullInfection(2)
-    printer(users)
-    User.create_groupings()"""
     zero = User("0")
     zero.addTrainee(User("1"))
     zero.addTrainee(User("2"))
@@ -136,10 +108,10 @@ def tester():
     User("98")
     User("99")
     users = User.getUsers()
-    printer(users)
-    #User.limited_infection(58, 2)
-    four.fullInfection(3)
-    printer(users)
+    #printer(users)
+    User.limited_infection(58, 2)
+    #four.fullInfection(3)
+    #printer(users)
     User.generateJS()
 
 def printer(users):

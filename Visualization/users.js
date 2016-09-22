@@ -19,7 +19,6 @@
     }
     index++;
   }
-  console.log(users);
 })();
 
 function fn() {
