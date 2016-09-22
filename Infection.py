@@ -102,8 +102,8 @@ def main():
     seven = User("Marge Klar")
     eight = User("Virgen Temme")
     nine = User("Herschel Allgood")
+    nine.addTrainee(eight)
     users = User.getUsers()
-    #printer(users)
     User.limited_infection(58, 1)
     four.fullInfection(1)
     zero.fullInfection(2)
@@ -111,7 +111,6 @@ def main():
     six.fullInfection(4)
     seven.fullInfection(5)
     eight.fullInfection(4)
-    #printer(users)
     User.generateJS()
 
 # For an ascii representation of the current state of users
