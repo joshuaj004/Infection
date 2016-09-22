@@ -1,11 +1,7 @@
 # This is the main file that will use the Users class
 from User import User
 
-
 def main():
-    tester()
-
-def tester():
     zero = User("0")
     zero.addTrainee(User("1"))
     zero.addTrainee(User("2"))
@@ -114,6 +110,7 @@ def tester():
     #printer(users)
     User.generateJS()
 
+# For an ascii representation of the current state of users
 def printer(users):
     for x in users:
         print(x)

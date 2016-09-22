@@ -32,7 +32,7 @@ class User:
 
     def addCoach(self, coach, auto=False):
         if len(self.coaches) > 0:
-            raise Exception("You cannot at a coach to a user who already has a coach")
+            raise Exception("You cannot add a coach to a user who already has a coach")
         else:
             self.coaches = [coach]
             if not auto:
@@ -59,7 +59,7 @@ class User:
 
     def removeTrainee(self, trainee, auto=False):
         if len(self.trainees) < 1:
-            raise Exception("This user has no trainess")
+            raise Exception("This user has no trainees")
         elif trainee not in self.trainees:
             raise Exception("This user is not coaching this trainee")
         else:
