@@ -75,9 +75,11 @@ class User:
 
     @staticmethod
     def __createGroupings():
+        # Creates a copy of the list of Users
         users = User.users[:]
         groupings = []
         while len(users) > 0:
+            # Pulls the first User and finds all coaches and trainees in the User's network
             base = users[0]
             base_groupings = base.__groupingsHelper()
             groupings.append(base_groupings)
@@ -88,6 +90,7 @@ class User:
 
 
     def __groupingsHelper(self):
+        # Returns a set of all of the Users connected to a certain User
         processed = []
         unprocessed = set()
         unprocessed.add(self)
@@ -118,6 +121,9 @@ class User:
         infection_list = []
         while current_val < hi and (index + 1) < usersLength:
             new_len = current_val + len(users[index])
+            # Makes sure that the current number of infected is within bounds
+            # Also checks if the next group would bring the number closer
+            # to the inputted number
             if current_val > number and abs(current_val - number) < abs(new_len - number):
                 break
             elif new_len < hi:
@@ -130,6 +136,8 @@ class User:
 
     @staticmethod
     def generateJS():
+        # Generates JavaScript code that is considered legal by JSLint and
+        # writes it to Visualization/data.js by default
         baseStr = "var users = [\n"
         for x in range(len(User.users)):
             user = User.users[x]
@@ -137,7 +145,7 @@ class User:
             userCoaches = "\"coaches\": {0}, ".format(User.__listToString(user.coaches))
             userTrainees = "\"trainees\": {0}, ".format(User.__listToString(user.trainees))
             userVersion = "\"version\": {0}".format(user.version)
-            tempStr = "    {" + userName + userCoaches + userTrainees + userVersion + "}"#"{\"name\": {0}, \"coaches\": {1}, \"trainees\" {2}, \"version\": {3} }".format(user.name, User.listToString(user.coaches), User.listToString(user.trainees), user.version)
+            tempStr = "    {" + userName + userCoaches + userTrainees + userVersion + "}"
             if x != (len(User.users) - 1):
                 tempStr += ','
             baseStr += tempStr + "\n"
