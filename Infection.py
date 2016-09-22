@@ -104,7 +104,7 @@ def main():
     nine = User("Herschel Allgood")
     nine.addTrainee(eight)
     users = User.getUsers()
-    User.limited_infection(58, 1)
+    User.limitedInfection(58, 1)
     four.fullInfection(1)
     zero.fullInfection(2)
     three.fullInfection(3)
