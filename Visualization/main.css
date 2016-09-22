@@ -7,3 +7,7 @@ body {
   border-width: thin;
   background-color: #eee;
 }
+
+.selected {
+  background: lightgreen;
+}
