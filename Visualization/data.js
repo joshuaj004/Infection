@@ -96,7 +96,7 @@ var users = [
     {"name": "94", "coaches": ['91'], "trainees": [], "version": 0},
     {"name": "95", "coaches": ['91'], "trainees": [], "version": 0},
     {"name": "96", "coaches": ['91'], "trainees": [], "version": 0},
-    {"name": "97", "coaches": [], "trainees": [], "version": 0},
-    {"name": "98", "coaches": [], "trainees": [], "version": 0},
-    {"name": "99", "coaches": [], "trainees": [], "version": 0}
+    {"name": "97", "coaches": [], "trainees": [], "version": 4},
+    {"name": "98", "coaches": [], "trainees": [], "version": 5},
+    {"name": "99", "coaches": [], "trainees": [], "version": 4}
 ];
