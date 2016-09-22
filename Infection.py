@@ -140,6 +140,7 @@ def tester():
     #User.limited_infection(58, 2)
     four.fullInfection(3)
     printer(users)
+    User.generateJS()
 
 def printer(users):
     for x in users:

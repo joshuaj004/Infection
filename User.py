@@ -128,6 +128,32 @@ class User:
             if user.version != infection:
                 user.updateVersion(infection)
 
+    @staticmethod
+    def generateJS():
+        baseStr = "var users = [\n"
+        for x in range(len(User.users)):
+            user = User.users[x]
+            userName = "\"name\": \"{0}\", ".format(user.name)
+            userCoaches = "\"coaches\": {0}, ".format(User.listToString(user.coaches))
+            userTrainees = "\"trainees\": {0}, ".format(User.listToString(user.trainees))
+            userVersion = "\"version\": {0}".format(user.version)
+            tempStr = "    {" + userName + userCoaches + userTrainees + userVersion + "}"#"{\"name\": {0}, \"coaches\": {1}, \"trainees\" {2}, \"version\": {3} }".format(user.name, User.listToString(user.coaches), User.listToString(user.trainees), user.version)
+            if x != (len(User.users) - 1):
+                tempStr += ','
+            baseStr += tempStr + "\n"
+        baseStr += '];'
+        f = open("Visualization/data.js", 'w')
+        print(baseStr, file=f)
+
+    @staticmethod
+    def listToString(someList):
+        if someList == []:
+            return []
+        else:
+            tempList = []
+            for name in someList:
+                tempList.append(str(name.name))
+            return tempList
 
     def __str__(self):
         n = "Name: " + self.name
