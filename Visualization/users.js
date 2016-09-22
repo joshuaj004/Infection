@@ -32,19 +32,23 @@
     var newLabel = document.createElement("label");
     var newCheckbox = document.createElement("input");
     var newBreak = document.createElement("br");
+    var checkValue = document.createElement("p");
+    checkValue.innerHTML = versions[v];
+    checkValue.style.margin = "0px";
     newCheckbox.type = "checkbox";
-    newLabel.value = versions[v];
-    newLabel.onclick = function() {
+    newCheckbox.value = Number(versions[v]);
+    newCheckbox.onclick = function() {
       boxClicked(this.value);
     };
     newLabel.appendChild(newCheckbox);
-    newLabel.innerHTML += versions[v];
+    newLabel.appendChild(checkValue);
     checkboxes.appendChild(newLabel);
     checkboxes.appendChild(newBreak);
   }
 })();
 
 function boxClicked(value) {
+  value = Number(value);
   if (onVersions.includes(value)) {
     onVersions.splice(onVersions.indexOf(value), 1);
   } else {

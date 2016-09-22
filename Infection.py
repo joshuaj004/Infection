@@ -105,8 +105,9 @@ def main():
     User("99")
     users = User.getUsers()
     #printer(users)
+    zero.fullInfection(1)
     User.limited_infection(58, 2)
-    #four.fullInfection(3)
+    three.fullInfection(3)
     #printer(users)
     User.generateJS()
 
