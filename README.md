@@ -12,6 +12,63 @@ This project contains the following items of interest:
 2. Navigate to Infection\Visualization
 3. Open index.html in your browser of choice
 
+## Legal Changes to the Tester Code
++ Create a User
+ 
+ ```python
+ charles = User("Charles")
+ ```
+ 
++ Add a trainee
+ 
+ ```python
+ karen.addTrainee(charles)
+ ```
+ 
+ + You can create a User inside of the addTrainee method
+  
+ ```python
+ karen.addTrainee(User("Joey"))
+ ```
+ 
++ Remove a trainee
+ 
+ ```python
+ karen.removeTrainee(charles)
+ ```
+ 
++ Add a coach
+ 
+ ```python
+ charles.addCoach(kim)
+ ```
+ 
+ + You can create a User inside of the addCoach method
+  
+ ```python
+ charles.addCoach(User("Doyle"))
+ ```
+ 
+ + A User can only have one coach at a time
+ 
++ Remove a coach
+ 
+ ```python
+ charles.removeCoach(kim)
+ ```
+ 
++ Fully infect a User's network of coaches and trainees
+ 
+ ```python
+ donald.fullInfection(3)
+ ```
+ 
++ Infect a certain number of Users
+
+ ```python
+ User.limitedInfection(20, 2)
+ ```
+
 ## The User Class
 
 The User Class implements the following methods:
