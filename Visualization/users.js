@@ -17,6 +17,9 @@
     newUser.setAttribute("version", users[user].version);
     versions.add(users[user].version);
     currentRow.appendChild(newUser);
+    if (index === 1) {
+      infoDisplay(users[0], true);
+    }
     if (index % 4 === 0 || index === users.length) {
       container.appendChild(currentRow);
       var newRow = document.createElement("div");
