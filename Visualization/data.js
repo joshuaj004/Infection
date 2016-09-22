@@ -97,6 +97,6 @@ var users = [
     {"name": "Norberto Puga", "coaches": ['Sharilyn Allaire'], "trainees": [], "version": 0},
     {"name": "Sofia Allard", "coaches": [], "trainees": [], "version": 4},
     {"name": "Marge Klar", "coaches": [], "trainees": [], "version": 5},
-    {"name": "Virgen Temme", "coaches": [], "trainees": [], "version": 4},
-    {"name": "Herschel Allgood", "coaches": [], "trainees": [], "version": 0}
+    {"name": "Virgen Temme", "coaches": ['Herschel Allgood'], "trainees": [], "version": 4},
+    {"name": "Herschel Allgood", "coaches": [], "trainees": ['Virgen Temme'], "version": 4}
 ];

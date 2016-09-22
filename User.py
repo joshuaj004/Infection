@@ -23,7 +23,7 @@ class User:
     def getVersion(self):
         return self.version
 
-    def updateVersion(self, version=1):
+    def __updateVersion(self, version=1):
         self.version = version
 
     @staticmethod
@@ -68,18 +68,20 @@ class User:
                 trainee.removeCoach(self, True)
 
     def fullInfection(self, infection=1):
-        infectees = self.groupings_helper()
+        infectees = self.__groupingsHelper()
         for infectee in infectees:
-            infectee.updateVersion(infection)
+            infectee.__updateVersion(infection)
 
 
     @staticmethod
-    def create_groupings():
+    def __createGroupings():
+        # Creates a copy of the list of Users
         users = User.users[:]
         groupings = []
         while len(users) > 0:
+            # Pulls the first User and finds all coaches and trainees in the User's network
             base = users[0]
-            base_groupings = base.groupings_helper()
+            base_groupings = base.__groupingsHelper()
             groupings.append(base_groupings)
             for x in base_groupings:
                 if x in users:
@@ -87,7 +89,8 @@ class User:
         User.groups = groupings
 
 
-    def groupings_helper(self):
+    def __groupingsHelper(self):
+        # Returns a set of all of the Users connected to a certain User
         processed = []
         unprocessed = set()
         unprocessed.add(self)
@@ -104,13 +107,13 @@ class User:
         return set(processed)
 
     @staticmethod
-    def limited_infection(number, infection=1):
+    def limitedInfection(number, infection=1):
         # This will use a 20% margin for the term close in
         # "infect close to a given number of users"
         low = int(number * 0.8)
         # Plus 1 because python int rounds to the lower int
         hi = int(number * 1.2 + 1)
-        User.create_groupings()
+        User.__createGroupings()
         users = sorted(User.groups[:], key=len, reverse=True)
         usersLength = len(users)
         current_val = 0
@@ -118,6 +121,9 @@ class User:
         infection_list = []
         while current_val < hi and (index + 1) < usersLength:
             new_len = current_val + len(users[index])
+            # Makes sure that the current number of infected is within bounds
+            # Also checks if the next group would bring the number closer
+            # to the inputted number
             if current_val > number and abs(current_val - number) < abs(new_len - number):
                 break
             elif new_len < hi:
@@ -126,18 +132,20 @@ class User:
             index += 1
         for user in infection_list:
             if user.version != infection:
-                user.updateVersion(infection)
+                user.__updateVersion(infection)
 
     @staticmethod
     def generateJS():
+        # Generates JavaScript code that is considered legal by JSLint and
+        # writes it to Visualization/data.js by default
         baseStr = "var users = [\n"
         for x in range(len(User.users)):
             user = User.users[x]
             userName = "\"name\": \"{0}\", ".format(user.name)
-            userCoaches = "\"coaches\": {0}, ".format(User.listToString(user.coaches))
-            userTrainees = "\"trainees\": {0}, ".format(User.listToString(user.trainees))
+            userCoaches = "\"coaches\": {0}, ".format(User.__listToString(user.coaches))
+            userTrainees = "\"trainees\": {0}, ".format(User.__listToString(user.trainees))
             userVersion = "\"version\": {0}".format(user.version)
-            tempStr = "    {" + userName + userCoaches + userTrainees + userVersion + "}"#"{\"name\": {0}, \"coaches\": {1}, \"trainees\" {2}, \"version\": {3} }".format(user.name, User.listToString(user.coaches), User.listToString(user.trainees), user.version)
+            tempStr = "    {" + userName + userCoaches + userTrainees + userVersion + "}"
             if x != (len(User.users) - 1):
                 tempStr += ','
             baseStr += tempStr + "\n"
@@ -146,7 +154,7 @@ class User:
         print(baseStr, file=f)
 
     @staticmethod
-    def listToString(someList):
+    def __listToString(someList):
         if someList == []:
             return []
         else:
