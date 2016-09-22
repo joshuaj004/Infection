@@ -22,10 +22,6 @@
   console.log(users);
 })();
 
-function rowCreator(users) {
-
-}
-
 function fn() {
   var place = Number(this.getAttribute("place"));
   user = users[place]
