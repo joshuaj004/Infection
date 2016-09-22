@@ -1,0 +1,9 @@
+body {
+  background-color: #fdf5e8;
+}
+
+.users {
+  border-style: dotted;
+  border-width: thin;
+  background-color: #eee;
+}
