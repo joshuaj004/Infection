@@ -6,6 +6,12 @@ This project contains the following items of interest:
 2. Tests for the User Class
 3. A visualization tool for the test-run data (or the data of any code produced by the User Class)
 
+# Quickstart Guide
+
+1. Run Infection.py, either as is, or after making any legal changes
+2. Navigate to Infection\Visualization
+3. Open index.html in your browser of choice
+
 ## The User Class
 
 The User Class implements the following methods:
